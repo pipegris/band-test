@@ -10,24 +10,39 @@
     let hash = window.location.hash;
     let bandKey = hash.replace('#', '');
 
-    let bands = localStorage.getItem('bands');
-    if (!bands) {
+    let bandsData = localStorage.getItem('bands');
+    if (!bandsData) {
         window.location = 'index.html';
     }
+    let bandList = JSON.parse(bandsData);
+    if (!bandList.hasOwnProperty(bandKey)) {
+        window.location = 'index.html';
+    }
+    let band = bandList[bandKey];
+
     let postParams = new URLSearchParams({access_token: ACCESS_TOKEN, band_key: bandKey}).toString()
     let postsEndpoint = ENDPOINTS.POSTS + '?' + postParams;
 
     $(function () {
 
-        let template = $("#post-item-tpl").html();
+        let postTpl = $("#post-item-tpl").html();
+        let commentTpl = $("#post-comment-tpl").html();
+        let bandTpl = $("#band-tpl").html();
+        let bandHTML = Mustache.to_html(bandTpl, band);
+        $('#band-container').html(bandHTML);
 
         $.ajax({
             url: postsEndpoint,
             dataType: 'json',
             success: function (response) {
                 $.each(response.result_data.items, function (index, post) {
-                    let html = Mustache.to_html(template, post);
-                    $('#posts-container').append(html);
+                    post.created_at = new Date(post.created_at).toLocaleDateString("es-ES");
+                    post.commentsHTML = '';
+                    $.each(post.latest_comments, function (index, comment) {
+                        post.commentsHTML += Mustache.to_html(commentTpl, comment);
+                    });
+                    let postsHTML = Mustache.to_html(postTpl, post);
+                    $('#posts-container').append(postsHTML);
                 });
             }
         });
