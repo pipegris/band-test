@@ -30,21 +30,16 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1>Mis Comunidades</h1>
-        <!--p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p-->
+        <h1>Albums</h1>
     </div>
 </section>
 
 <section class="container">
-    <div id="bands-container" class="row"></div>
+    <div id="albums-container" class="row"></div>
 </section>
 
 
-<script id="band-item-tpl" type="text/template">
+<script id="album-item-tpl" type="text/template">
     <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
             <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{cover}}"/>
@@ -52,10 +47,9 @@
                 <p class="card-text">{{name}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a class="btn btn-sm btn-outline-secondary" href="posts.html#{{band_key}}">Publicaciones</a>
-                        <a class="btn btn-sm btn-outline-secondary" href="albums.html#{{band_key}}">Albums</a>
+                        <!--a class="btn btn-sm btn-outline-secondary" href="photos.html#{{photo_album_key}}" disabled>Ver fotos</a-->
                     </div>
-                    <small class="text-muted">Miembros {{member_count}}</small>
+                    <small class="text-muted">{{photo_count}} fotos</small>
                 </div>
             </div>
         </div>
@@ -71,6 +65,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.min.js"
         integrity="sha256-MPgtcamIpCPKRRm1ppJHkvtNBAuE71xcOM+MmQytXi8=" crossorigin="anonymous"></script>
 
-<script src="assets/js/bands.js"></script>
+<script src="assets/js/albums.js"></script>
 </body>
 </html>
